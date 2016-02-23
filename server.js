@@ -85,7 +85,7 @@ app.get('/model', function(req, res) {
         res.sendfile('model.js'); 
     });
   
- app.get('/index', function(req, res) {
+ app.get('/', function(req, res) {
         console.log('sending index.html');
         res.sendfile('index.html'); // load the single view file (angular will handle the page changes on the front-end)
     });
