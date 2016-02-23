@@ -1,0 +1,81 @@
+<!-- index.html -->
+<!doctype html>
+
+<!-- ASSIGN OUR ANGULAR MODULE -->
+<html ng-app="mmsa">
+<head>
+
+    <!-- META -->
+    <meta charset="utf-8">
+
+    <!-- SCROLLS -->
+    <link rel="stylesheet" href="css.css">    
+
+   <!-- SPELLS -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script><!-- load angular -->
+    
+    <script lang="javascript">
+    
+var mmsa = angular.module('mmsa', []);    
+
+function mainController($scope, $http) {
+    $scope.formData = {};
+
+    // when landing on the page, get all sections and show them
+    $http.get('/mmsa/data.js')
+        .success(function(data) {
+            $scope.sections = data;
+            console.log(data);
+        })
+        .error(function(data) {
+            console.log('Error: ' + data);
+        });
+}
+   
+</script>    
+    
+    
+    
+</head>
+
+<body ng-controller="mainController">
+
+<h1>Company Maturity Model - Self Assessment</h1>
+
+<table width="100%">
+    <tr>
+        <td width="20%" valign="top">
+            <div ng-repeat="section in sections">
+                <h3>{{section.id}} {{section.title}}</h3>
+                
+                <div ng-repeat="q in section.questions">
+                    <div class="completed{{q.completed != nil}}">{{q.id}} {{q.title}}</div>
+                </div>
+            </div>    
+        </td>
+        <td>
+            
+<div ng-repeat="section in sections">
+<h2>    {{section.id}}. {{section.title}}  </h2>
+    
+    <div ng-repeat="q in section.questions">
+        <h3  class="completed{{q.completed != nil}}">{{q.id}} {{q.title}}: {{q.subtitle}}</h3>
+        
+        <div  ng-repeat="option in q.options">
+                <input id="radio{{option.number}}" ng-model="q.completed" type="radio" name="radio{{q.id}}" value="{{option.number}}" ><label for="radio{{q.id}}"><span><span></span></span>{{option.number}}. {{option.text}}</label>
+        </div>
+    </div>
+</div>    
+            
+            
+        </td>
+    </tr>
+</table>            
+ 
+
+    
+</body>
+
+
+</html>
