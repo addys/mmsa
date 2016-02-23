@@ -59,13 +59,13 @@ function mainController($scope, $http) {
             
 <div ng-repeat="section in sections">
     
-<h2>    {{section.id}}. {{section.title}}  </h2>
 <a name="section{{section.id}}"></a>
+<h2>    {{section.id}}. {{section.title}}  </h2>
     
     <div ng-repeat="q in section.questions">
 
-        <h3  class="completed{{q.completed != nil}}">{{q.id}} {{q.title}}: {{q.subtitle}}</h3>
         <a name="q{{q.id}}"></a>
+        <h3  class="completed{{q.completed != nil}}">{{q.id}} {{q.title}}: {{q.subtitle}}</h3>
         
         <div  ng-repeat="option in q.options">
                 <input id="radio{{option.number}}" ng-model="q.completed" type="radio" name="radio{{q.id}}" value="{{option.number}}" ><label for="radio{{q.id}}"><span><span></span></span>{{option.number}}. {{option.text}}</label>

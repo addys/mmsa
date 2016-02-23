@@ -9,19 +9,13 @@ body{
 
 .stealthlink
 {
+    color:black;
     text-decoration: none;
 }
 
 .completedtrue
 {
     color:green;
-    text-decoration: none;
-}
-
-.completedfalse
-{
-    color:black;
-    text-decoration: none;
 }
 
 input[type=checkbox]:not(old),
