@@ -12,21 +12,11 @@
     <link rel="stylesheet" href="css.css">    
 
 
-<!-- the important styles are below... -->
-		<style>
-			#wrapper {overflow: hidden;}
-			#content {margin-right:10px; float:right; min-height:1200px;}
-			#sidebar {width:284px; padding:10px; background: #eee; float:left; height:600px;}
-			
-			#portamento_container {float:left; position:relative;} /* take the positioning of the sidebar, and become the start point for the sidebar positioning */
-			#portamento_container #sidebar {float:none; position:absolute;} /* no need to float anymore, become absolutely positoned */
-			#portamento_container #sidebar.fixed {position:fixed;} /* if the panel is sliding, it needs position:fixed */
-		</style>
+
 
    <!-- SPELLS -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script><!-- load angular -->
-    <script src="portamento.js"></script>    
     <script lang="javascript">
     
 var mmsa = angular.module('mmsa', []);    
@@ -45,10 +35,22 @@ function mainController($scope, $http) {
         });
 }
 
-$(document).ready(function() {
-    $('#sidebar').portamento();	
-});	
 
+
+function sticky_relocate() {
+    var window_top = $(window).scrollTop();
+    var div_top = $('#sticky-anchor').offset().top;
+    if (window_top > div_top) {
+        $('#sticky').addClass('stick');
+    } else {
+        $('#sticky').removeClass('stick');
+    }
+}
+
+$(function () {
+    $(window).scroll(sticky_relocate);
+    sticky_relocate();
+});
    
 </script>    
     
@@ -63,10 +65,11 @@ $(document).ready(function() {
 
 <h1>Company Maturity Model - Self Assessment</h1>
 
-<table width="100%" id="wrapper">
+<table width="100%">
     <tr>
-        <td width="20%" valign="top" id="sidebar">
-            <div ng-repeat="section in sections">
+        <td width="20%" valign="top">
+            <div id="sticky-anchor"></div>
+            <div id="sticky" ng-repeat="section in sections">
                
                 <h3><a class="stealthlink" href="#section{{section.id}}">{{section.id}} {{section.title}}</a></h3>
                 
