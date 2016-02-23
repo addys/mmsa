@@ -9,9 +9,10 @@ body{
 
 .bordered
 {
-    border-size:2px;
+    border-size:1px;
     border-style:solid;
-    border-color: aquamarine;
+    border-color: lightsteelblue; 
+    margin: 10px;
 }
 
 .stealthlink
