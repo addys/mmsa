@@ -23,7 +23,7 @@ function mainController($scope, $http) {
     $scope.formData = {};
 
     // when landing on the page, get all sections and show them
-    $http.get('/mmsa/data.js')
+    $http.get('/api/sections')
         .success(function(data) {
             $scope.sections = data;
             console.log(data);
