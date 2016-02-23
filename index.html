@@ -70,6 +70,9 @@ $(function () {
         <td width="20%" valign="top">
             <div id="sticky-anchor"></div>
             <div id="sticky">
+                
+                <h3><a class="stealthlink" href="#intro">Intro</a></h3>
+                
                 <div ng-repeat="section in sections">
                 
                     <h3><a class="stealthlink" href="#section{{section.id}}">{{section.id}} {{section.title}}</a></h3>
@@ -81,6 +84,20 @@ $(function () {
             </div>    
         </td>
         <td id="content">
+
+    <a name="intro"></a>
+    <h3>What is this?</h3>
+    The Microsoft Ventures Accelerator runs a customized program which we tailor to the specific needs of your company.  This assessment is a useful tool for uncovering those needs, and determining which areas of focus will maximize the benefit your company derives from the Accelerator program.  
+
+    <h3>Instructions</h3>
+    <h4>Step 1 – Rate Yourself</h4>
+    This document enables you to rate yourself against many different dimensions. Each dimension includes a table with several descriptions, numbered in ascending order. Choose the highest-valued description which fully matches your company.   
+    <h4>Step 2 – Prioritize</h4>
+    This assessment helps to facilitate a productive discussion of your goals and challenges.  The MVA team will work with you to refine (or define) the business, product and technical priorities to focus on.
+    <h4>Step 3 – Make a plan</h4>
+    Together we'll build a work plan to help you reach your goals.  Given your plan, the MVA team can hook you up to the right resources (such as legal/financial/marketing/technical guidance and 1:1 mentor meetings).
+
+
             
 <div ng-repeat="section in sections">
     
