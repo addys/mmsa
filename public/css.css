@@ -7,6 +7,11 @@ body{
   line-height : 1.5;
 }
 
+.bordered
+{
+    border: 1px; border-color: aquamarine;
+}
+
 .stealthlink
 {
     color:black;
