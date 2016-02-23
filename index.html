@@ -69,12 +69,14 @@ $(function () {
     <tr>
         <td width="20%" valign="top">
             <div id="sticky-anchor"></div>
-            <div id="sticky" ng-repeat="section in sections">
-               
-                <h3><a class="stealthlink" href="#section{{section.id}}">{{section.id}} {{section.title}}</a></h3>
+            <div id="sticky">
+                <div ng-repeat="section in sections">
                 
-                <div ng-repeat="q in section.questions">
-                    <a class="stealthlink" href="#q{{q.id}}"><span class="completed{{q.completed != nil}}">{{q.id}} {{q.title}}</span></a>
+                    <h3><a class="stealthlink" href="#section{{section.id}}">{{section.id}} {{section.title}}</a></h3>
+                    
+                    <div ng-repeat="q in section.questions">
+                        <a class="stealthlink" href="#q{{q.id}}"><span class="completed{{q.completed != nil}}">{{q.id}} {{q.title}}</span></a>
+                    </div>
                 </div>
             </div>    
         </td>
