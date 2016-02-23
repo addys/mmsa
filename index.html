@@ -45,7 +45,7 @@ function mainController($scope, $http) {
 
 <table width="100%">
     <tr>
-        <td width="20%" valign="top">
+        <td width="20%" valign="top" class="nav">
             <div ng-repeat="section in sections">
                
                 <h3><a class="stealthlink" href="#section{{section.id}}">{{section.id}} {{section.title}}</a></h3>
@@ -78,7 +78,11 @@ function mainController($scope, $http) {
     </tr>
 </table>            
  
-
+<script type="text/javascript">
+$(document).ready(function() {
+   $('#nav').localScroll({duration:800});
+});
+</script>
     
 </body>
 
