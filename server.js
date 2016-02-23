@@ -74,18 +74,9 @@ router.route('/sections/:section_id/:question_id')
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api
 app.use('/api', router);
-
-app.get('*.css', function(req, res) {
-        console.log('sending css');
-        res.sendfile('css.css'); 
-    });
-
-app.get('/model', function(req, res) {
-        console.log('sending model');
-        res.sendfile('model.js'); 
-    });
+app.use(express.static('public'));
   
- app.get('/', function(req, res) {
+app.get('/', function(req, res) {
         console.log('sending index.html');
         res.sendfile('index.html'); // load the single view file (angular will handle the page changes on the front-end)
     });
