@@ -48,10 +48,10 @@ function mainController($scope, $http) {
         <td width="20%" valign="top">
             <div ng-repeat="section in sections">
                
-                <h3><a name="section{{section.id}}">{{section.id}} {{section.title}}</a></h3>
+                <h3><a href="#section{{section.id}}">{{section.id}} {{section.title}}</a></h3>
                 
                 <div ng-repeat="q in section.questions">
-                    <div class="completed{{q.completed != nil}}"><a name="q{{q.id}}">{{q.id}} {{q.title}}</a></div>
+                    <div class="completed{{q.completed != nil}}"><a href="#q{{q.id}}">{{q.id}} {{q.title}}</a></div>
                 </div>
             </div>    
         </td>
@@ -60,12 +60,12 @@ function mainController($scope, $http) {
 <div ng-repeat="section in sections">
     
 <h2>    {{section.id}}. {{section.title}}  </h2>
-<a href="#section{{section.id}}"></a>
+<a name="section{{section.id}}"></a>
     
     <div ng-repeat="q in section.questions">
 
         <h3  class="completed{{q.completed != nil}}">{{q.id}} {{q.title}}: {{q.subtitle}}</h3>
-        <a href="#q{{q.id}}"></a>
+        <a name="q{{q.id}}"></a>
         
         <div  ng-repeat="option in q.options">
                 <input id="radio{{option.number}}" ng-model="q.completed" type="radio" name="radio{{q.id}}" value="{{option.number}}" ><label for="radio{{q.id}}"><span><span></span></span>{{option.number}}. {{option.text}}</label>
