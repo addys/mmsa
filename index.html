@@ -48,10 +48,10 @@ function mainController($scope, $http) {
         <td width="20%" valign="top">
             <div ng-repeat="section in sections">
                
-                <h3><a href="#section{{section.id}}">{{section.id}} {{section.title}}</a></h3>
+                <h3><a class="stealthlink" href="#section{{section.id}}">{{section.id}} {{section.title}}</a></h3>
                 
                 <div ng-repeat="q in section.questions">
-                    <a class="completed{{q.completed != nil}}" href="#q{{q.id}}">{{q.id}} {{q.title}}</a>
+                    <a class="stealthlink" href="#q{{q.id}}"><span class="completed{{q.completed != nil}}">{{q.id}} {{q.title}}</span></a>
                 </div>
             </div>    
         </td>

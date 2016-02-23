@@ -7,6 +7,11 @@ body{
   line-height : 1.5;
 }
 
+.stealthlink
+{
+    text-decoration: none;
+}
+
 .completedtrue
 {
     color:green;
