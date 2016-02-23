@@ -86,24 +86,30 @@ $(function () {
         <td id="content">
 
 <div class="bordered">
-    <a name="intro"></a>
-    <h3>Introduction</h3>
-    The Microsoft Ventures Accelerator runs a customized program which we tailor to the specific needs of your company.  This assessment is a useful tool for uncovering those needs, and determining which areas of focus will maximize the benefit your company derives from the Accelerator program.  
+    <table>
+        <tr>
+            <td>
+                <h2><a name="intro"></a>Introduction</h2>
+                The Microsoft Ventures Accelerator runs a customized program which we tailor to the specific needs of your company.  This assessment is a useful tool for uncovering those needs, and determining which areas of focus will maximize the benefit your company derives from the Accelerator program.  
 
-    <h3>Instructions</h3>
-    <h4>Step 1 – Rate Yourself</h4>
-    This document enables you to rate yourself against many different dimensions. Each dimension includes a table with several descriptions, numbered in ascending order. Choose the highest-valued description which fully matches your company.   
-    <h4>Step 2 – Prioritize</h4>
-    This assessment helps to facilitate a productive discussion of your goals and challenges.  The MVA team will work with you to refine (or define) the business, product and technical priorities to focus on.
-    <h4>Step 3 – Make a plan</h4>
-    Together we'll build a work plan to help you reach your goals.  Given your plan, the MVA team can hook you up to the right resources (such as legal/financial/marketing/technical guidance and 1:1 mentor meetings).
+                <h3>Instructions</h3>
+                <h4>Step 1 – Rate Yourself</h4>
+                This document enables you to rate yourself against many different dimensions. Each dimension includes a table with several descriptions, numbered in ascending order. Choose the highest-valued description which fully matches your company.   
+                <h4>Step 2 – Prioritize</h4>
+                This assessment helps to facilitate a productive discussion of your goals and challenges.  The MVA team will work with you to refine (or define) the business, product and technical priorities to focus on.
+                <h4>Step 3 – Make a plan</h4>
+                Together we'll build a work plan to help you reach your goals.  Given your plan, the MVA team can hook you up to the right resources (such as legal/financial/marketing/technical guidance and 1:1 mentor meetings).
+            </td>
+            <td>
+                <img src="somesortofidea.png">
+            </td>
+        </tr>
+    </table>
 </div>
 
             
 <div ng-repeat="section in sections" class="bordered">
-    
-<a name="section{{section.id}}"></a>
-<h2>    {{section.id}}. {{section.title}}  </h2>
+<h2><a name="section{{section.id}}"></a> {{section.id}}. {{section.title}}</h2>
     
     <div ng-repeat="q in section.questions">
 
