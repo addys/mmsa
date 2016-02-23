@@ -9,10 +9,11 @@ body{
 
 .bordered
 {
-    border-size:1px;
+    border-width: 1px;
     border-style:solid;
     border-color: lightsteelblue; 
     margin: 10px;
+    padd: 10px;
 }
 
 .stealthlink
