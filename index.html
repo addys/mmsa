@@ -51,7 +51,7 @@ function mainController($scope, $http) {
                 <h3><a href="#section{{section.id}}">{{section.id}} {{section.title}}</a></h3>
                 
                 <div ng-repeat="q in section.questions">
-                    <div class="completed{{q.completed != nil}}"><a href="#q{{q.id}}">{{q.id}} {{q.title}}</a></div>
+                    <a class="completed{{q.completed != nil}}" href="#q{{q.id}}">{{q.id}} {{q.title}}</a>
                 </div>
             </div>    
         </td>
