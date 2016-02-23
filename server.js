@@ -1,14 +1,14 @@
 // server.js
 
-
+/*
 var http = require('http')
 var port = process.env.PORT || 1337;
 http.createServer(function(req, res) {
   res.writeHead(200, { 'Content-Type': 'text/plain' });
   res.end('Hello World\n');
 }).listen(port);
+*/
 
-/*
 
 // BASE SETUP
 // =============================================================================
@@ -73,21 +73,21 @@ router.route('/sections/:section_id/:question_id')
 
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api
-app.use('/mmsa/api', router);
+app.use('api', router);
 
 app.get('*.css', function(req, res) {
         console.log('sending css');
-        res.sendfile(__dirname + '/css.css'); 
+        res.sendfile('css.css'); 
     });
 
-//app.get('model', function(req, res) {
-//        console.log('sending css');
-//        res.sendfile(__dirname + '/model.js'); 
-//    });
+app.get('model', function(req, res) {
+        console.log('sending model');
+        res.sendfile('model.js'); 
+    });
 
  app.get('*', function(req, res) {
         console.log('sending index.html');
-        res.sendfile(__dirname + '/index.html'); // load the single view file (angular will handle the page changes on the front-end)
+        res.sendfile('index.html'); // load the single view file (angular will handle the page changes on the front-end)
     });
 
 // START THE SERVER
@@ -107,4 +107,3 @@ function find(arr, id)
         return filtered[0];
     }
 }
-*/
