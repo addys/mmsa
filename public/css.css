@@ -9,7 +9,9 @@ body{
 
 .bordered
 {
-    border: 1px; border-color: aquamarine;
+    border-size:2px;
+    border-style:solid;
+    border-color: aquamarine;
 }
 
 .stealthlink
