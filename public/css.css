@@ -7,6 +7,17 @@ body{
   line-height : 1.5;
 }
 
+h2, .h2 {
+    font-size: 3em;
+    line-height: 1.4em;
+    margin-bottom: 20px;
+}
+h1, h2, h3, h4, h5 {
+    margin: 0;
+    font-family: 'Segoe UI Light', Tahoma, Verdana, Arial, sans-serif;
+    font-weight: 200;
+}
+
 .bordered
 {
     border-width: 1px;
