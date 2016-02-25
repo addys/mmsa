@@ -128,3 +128,26 @@ input[type=radio]:not(old):checked +  label > span > span{
     z-index: 10000;
     border-radius: 0 0 0.5em 0.5em;
 }
+
+
+.top-marquee-bg {
+    background-color: rgb(255, 255, 255);
+    background-image:url("https://venturesblob.blob.core.windows.net/generaluploads/1600x460_bw1.jpg");
+    background-position:50% 50%;
+    background-repeat:no-repeat;
+    background-size:cover;
+    box-sizing:border-box;
+    color:rgb(51, 51, 51);
+    display:block;
+    font-family:'Segoe UI Light', Tahoma, Verdana, Arial, sans-serif;
+    font-size:10px;
+    font-weight:normal;
+    height:368px;
+    width:2449px;
+    -webkit-font-smoothing:antialiased;
+}
+
+.top-marquee-bg-texture
+{
+    background-image: url(https://venturesblob.blob.core.windows.net/generaluploads/patternChevron.png);
+}
