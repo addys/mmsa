@@ -142,7 +142,7 @@ input[type=radio]:not(old):checked +  label > span > span{
     font-family:'Segoe UI Light', Tahoma, Verdana, Arial, sans-serif;
     font-size:10px;
     font-weight:normal;
-    height:368px;
+    height:168px;
     width:2449px;
     -webkit-font-smoothing:antialiased;
 }
