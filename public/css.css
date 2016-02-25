@@ -8,15 +8,26 @@ body{
   color: #333;
 }
 
+h1, .h1 {
+    font-size: 3.6em; 
+    line-height: 1.4em;
+}
+
 h2, .h2 {
     font-size: 3em;
     line-height: 1.4em;
     margin-bottom: 20px;
 }
-h1, h2, h3, h4, h5 {
-    margin: 0;
-    font-family: 'Segoe UI Light', Tahoma, Verdana, Arial, sans-serif;
-    font-weight: 200;
+
+h3, .h3 {
+    font-size: 2em;
+    line-height: 1.3em;
+}
+
+h3.larger, .h3-larger {
+    font-size: 2.6em;
+    line-height: 1.4em;
+    margin-bottom: 20px;
 }
 
 .bordered
