@@ -65,7 +65,7 @@ $(function () {
 
 <div class="top-marquee-bg" style="background-image:url(https://venturesblob.blob.core.windows.net/generaluploads/1600x460_bw1.jpg);background-color:#ffffff;">
     <div class="top-marquee-bg-texture" style="background-image:url(https://venturesblob.blob.core.windows.net/generaluploads/patternChevron.png);"></div>
-    <h1 style="color:white; padding-left:50px;"><br/>Company Maturity Model - Self Assessment</h1>
+    <h1 style="color:white; padding-left:50px;"><br/><img src="growbw.png">Company Maturity Model - Self Assessment</h1>
 </div>
 
 <table width="100%">
@@ -78,7 +78,7 @@ $(function () {
                 
                 <div ng-repeat="section in sections">
                 
-                    <h4><a class="stealthlink" href="#section{{section.id}}">{{section.id}} {{section.title}}</a></h4>
+                    <h4><a class="stealthlink" href="#section{{section.id}}">{{section.id}}. {{section.title}}</a></h4>
                     
                     <div ng-repeat="q in section.questions">
                         <a class="stealthlink" href="#q{{q.id}}"><span class="completed{{q.completed != nil}}">{{q.id}} {{q.title}}</span></a>
