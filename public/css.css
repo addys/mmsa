@@ -154,4 +154,5 @@ input[type=radio]:not(old):checked +  label > span > span{
     filter: alpha(opacity=8);
     opacity: 0.08;
     background-repeat: repeat;
+    width:100%;
 }
