@@ -1,5 +1,4 @@
 body{
-  position    : relative;
   min-height  : 100%;
   margin      : 0;
   padding     : 0;
@@ -150,4 +149,9 @@ input[type=radio]:not(old):checked +  label > span > span{
 .top-marquee-bg-texture
 {
     background-image: url(https://venturesblob.blob.core.windows.net/generaluploads/patternChevron.png);
+    position: absolute;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=8)";
+    filter: alpha(opacity=8);
+    opacity: 0.08;
+    background-repeat: repeat;
 }
