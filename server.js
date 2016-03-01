@@ -1,15 +1,5 @@
 // server.js
 
-/*
-var http = require('http')
-var port = process.env.PORT || 1337;
-http.createServer(function(req, res) {
-  res.writeHead(200, { 'Content-Type': 'text/plain' });
-  res.end('Hello World\n');
-}).listen(port);
-*/
-
-
 // BASE SETUP
 // =============================================================================
 
@@ -18,8 +8,8 @@ var express    = require('express');        // call express
 var app        = express();                 // define our app using express
 var bodyParser = require('body-parser');
 
+// include the Maturity Model data
 var model      = require('./model.js');
-
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST
@@ -45,15 +35,17 @@ router.get('/', function(req, res) {
 });
 
 router.post('/sections', function(req, res){
-    
 
+    save(req.body);
+
+// - TEMP DEBUG CODE ----------------------
     var data = Array.prototype.slice.call(req.body);
-    
     data.forEach(function(section){
         section.questions.forEach(function(q){
             console.log(q);        
         })
     });
+// - TEMP DEBUG CODE ----------------------
 
     res.status(200).end();
     
@@ -119,4 +111,9 @@ function find(arr, id)
     {
         return filtered[0];
     }
+}
+
+function save(sections)
+{
+    
 }
