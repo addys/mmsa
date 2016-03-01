@@ -11,125 +11,78 @@
     <!-- SCROLLS -->
     <link rel="stylesheet" href="css.css">    
 
-
-
-
    <!-- SPELLS -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script><!-- load angular -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script><!-- load angular -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script><!-- load angular -->
+    
     <script lang="javascript">
     
-var mmsa = angular.module('mmsa', []);    
-
-function mainController($scope, $http) {
-    $scope.formData = {};
-
-    // when landing on the page, get all sections and show them
-    $http.get('/api/sections')
-        .success(function(data) {
-            $scope.sections = data;
-            console.log(data);
+    var mmsa = angular.module('mmsa', ['ngRoute']); 
+    
+    mmsa.config(function($routeProvider){
+        $routeProvider
+        .when("/main", {
+            templateUrl: "mainview.html",
+            controller: "mainController"
         })
-        .error(function(data) {
-            console.log('Error: ' + data);
-        });
-}
+        .when("/summary", {
+            templateUrl: "summaryview.html",
+            controller: "summaryController"
+        })
+        .otherwise({redirectTo: "/main"});
+    });
+
+    mmsa.controller('mainController', function($scope, $http, $location) {
+        $scope.formData = {};
+
+        // when landing on the page, get all sections and show them
+        $http.get('/api/sections')
+            .success(function(data) {
+                $scope.sections = data;
+                //console.log(data);
+            })
+            .error(function(data) {
+                console.log('Error: ' + data);
+            });
+
+    mmsa.controller('summaryController',  function() {
+        
+        });  
 
 
+        $scope.save = function() {            
+                $http.post('/api/sections', $scope.sections)
+                    .success(function(data) {
+                        
+                        //$scope.formData = {}; // clear the form so our user is ready to enter another
+                        $location.path('/summary');
+                        
+                        //$scope.todos = data;
+                        //console.log(data);
+                    })
+                    .error(function(data) {
+                        console.log('Error: ' + data);
+                    });  
+        };
+            
+    });
 
-function sticky_relocate() {
-    var window_top = $(window).scrollTop();
-    var div_top = $('#sticky-anchor').offset().top;
-    if (window_top > div_top) {
-        $('#sticky').addClass('stick');
-    } else {
-        $('#sticky').removeClass('stick');
-    }
-}
-
-$(function () {
-    $(window).scroll(sticky_relocate);
-    sticky_relocate();
-});
-   
 </script>    
-    
-		
-		
-		    
-    
+   
     
 </head>
 
-<body ng-controller="mainController">
+<body>
 
 <div class="top-marquee-bg" style="background-image:url(https://venturesblob.blob.core.windows.net/generaluploads/1600x460_bw1.jpg);background-color:#ffffff;">
     <div class="top-marquee-bg-texture" style="background-image:url(https://venturesblob.blob.core.windows.net/generaluploads/patternChevron.png);"></div>
     <h1 style="color:white; padding-left:50px;" valign="center"><br/><img src="growbw.png" height="100" width="100">Company Maturity Model - Self Assessment</h1>
 </div>
 
-<table width="100%">
-    <tr>
-        <td width="20%" valign="top">
-            <div id="sticky-anchor"></div>
-            <div id="sticky">
-                
-                <h4><a class="stealthlink" href="#intro">Intro</a></h4>
-                
-                <div ng-repeat="section in sections">
-                
-                    <h4><a class="stealthlink" href="#section{{section.id}}">{{section.id}}. {{section.title}}</a></h4>
-                    
-                    <div ng-repeat="q in section.questions">
-                        <a class="stealthlink" href="#q{{q.id}}"><span class="completed{{q.completed != nil}}">{{q.id}} {{q.title}}</span></a>
-                    </div>
-                </div>
-            </div>    
-        </td>
-        <td id="content">
+<div ng-view>
 
-<div class="bordered">
-    <table>
-        <tr>
-            <td>
-                <h2><a name="intro"></a>Introduction</h2>
-                The Microsoft Ventures Accelerator runs a customized program which we tailor to the specific needs of your company.  This assessment is a useful tool for uncovering those needs, and determining which areas of focus will maximize the benefit your company derives from the Accelerator program.  
-
-                <h3>Instructions</h3>
-                <h4>Step 1 – Rate Yourself</h4>
-                This document enables you to rate yourself against many different dimensions. Each dimension includes a table with several descriptions, numbered in ascending order. Choose the highest-valued description which fully matches your company.   
-                <h4>Step 2 – Prioritize</h4>
-                This assessment helps to facilitate a productive discussion of your goals and challenges.  The MVA team will work with you to refine (or define) the business, product and technical priorities to focus on.
-                <h4>Step 3 – Make a plan</h4>
-                Together we'll build a work plan to help you reach your goals.  Given your plan, the MVA team can hook you up to the right resources (such as legal/financial/marketing/technical guidance and 1:1 mentor meetings).
-            </td>
-            <td valign="top">
-                <br/><br/>
-                <img src="somesortofidea.png" style="max-width:100%">
-            </td>
-        </tr>
-    </table>
-</div>
-
-            
-<div ng-repeat="section in sections" class="bordered">
-<h2><a name="section{{section.id}}"></a> {{section.id}}. {{section.title}}</h2>
-    
-    <div ng-repeat="q in section.questions">
-
-        <a name="q{{q.id}}"></a>
-        <h3  class="completed{{q.completed != nil}}">{{q.id}} {{q.title}}: {{q.subtitle}}</h3>
-        
-        <div  ng-repeat="option in q.options">
-                <input id="radio{{option.number}}" ng-model="q.completed" type="radio" name="radio{{q.id}}" value="{{option.number}}" ><label for="radio{{q.id}}"><span><span></span></span>{{option.number}}. {{option.text}}</label>
-        </div>
-    </div>
-</div>    
-            
-            
-        </td>
-    </tr>
-</table>            
+ </div>
  
 </body>
 

@@ -44,6 +44,26 @@ router.get('/', function(req, res) {
     res.json({ message: 'hooray! welcome to our api!' });   
 });
 
+router.post('/sections', function(req, res){
+    
+
+    var data = Array.prototype.slice.call(req.body);
+    
+    data.forEach(function(section){
+        section.questions.forEach(function(q){
+            console.log(q);        
+        })
+    });
+
+    res.status(200).end();
+    
+/*  var userName = req.body.userName;
+  var html = 'Hello: ' + userName + '.<br>' +
+             '<a href="/">Try again.</a>';
+  res.send(html);
+*/  
+});
+
 router.route('/sections')
     // get all the sections (accessed at GET http://localhost:8088/api/sections)
     .get(function(req, res) {
@@ -76,6 +96,7 @@ router.route('/sections/:section_id/:question_id')
 app.use('/api', router);
 
 app.use(express.static('public'));
+app.use(express.static('scripts'));
   
 app.get('/', function(req, res) {
         console.log('sending index.html');
