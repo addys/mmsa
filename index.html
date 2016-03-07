@@ -37,7 +37,7 @@
         $scope.formData = {};
 
         // when landing on the page, get all sections and show them
-        $http.get('/api/sections')
+        $http.get('/api/model')
             .success(function(data) {
                 $scope.sections = data;
                 //console.log(data);
@@ -52,7 +52,7 @@
 
 
         $scope.save = function() {            
-                $http.post('/api/sections', $scope.sections)
+                $http.post('/api/form', $scope.sections)
                     .success(function(data) {
                         
                         //$scope.formData = {}; // clear the form so our user is ready to enter another
