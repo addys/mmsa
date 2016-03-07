@@ -88,6 +88,10 @@
                         });  
             };
             
+            $scope.view = function() {        
+                        $location.path('/summary');
+            };            
+            
     });
 
     mmsa.controller('summaryController',  function($scope, $http, $location, user) {
