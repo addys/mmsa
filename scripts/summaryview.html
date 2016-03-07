@@ -1,1 +1,27 @@
-BOO   
+<br>
+
+<div align="center" width="80%">
+
+<table>
+    <tr>
+        <td width="20%"></td>
+        <td >
+             <div class="bordered">
+                
+                <div><h3>Company: <b>{{form.company}}</b> &nbsp;&nbsp; Last updated: <b>{{form.timestamp  | date:'medium'}}</b></h3></div>
+                
+                    <div ng-repeat="section in sections">
+                        <h4>{{section.id}}. {{section.title}}</h4>
+                        <table>
+                        <tr ng-repeat="q in section.questions">
+                                <td>{{q.id}} {{q.title}}</td><td><img src="score_{{q.answer}}.png" width="50%" height="40%"></td>
+                        </tr>
+                        </table>
+                    </div>
+             </div>
+        </td>
+        <td width="20%"></td>
+    </tr>
+</table>        
+
+</div>

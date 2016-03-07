@@ -14,7 +14,8 @@
    <!-- SPELLS -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script><!-- load angular -->
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script><!-- load angular -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script><!-- load angular-route -->
+    <script src="linq.js"></script><!-- load linq.js -->
     
     <script lang="javascript">
     
@@ -30,43 +31,148 @@
             templateUrl: "summaryview.html",
             controller: "summaryController"
         })
-        .otherwise({redirectTo: "/main"});
+        .when("/login", {
+            templateUrl: "login.html",
+            controller: "loginController"
+        })
+        .otherwise({redirectTo: "/login"});
     });
 
-    mmsa.controller('mainController', function($scope, $http, $location) {
-        $scope.formData = {};
+    mmsa.factory("user",function(){
+        return {};
+    });
 
+    mmsa.controller('mainController', function($scope, $http, $location, user) {
+        
+        if (user.name == null)
+        {
+            $location.path('/login');    
+        }
+        
+        $scope.formData = {};
+        $scope.user = user;
+        
+        loadModelAndForm($scope, $http, user);
+/*        
         // when landing on the page, get all sections and show them
         $http.get('/api/model')
             .success(function(data) {
                 $scope.sections = data;
-                //console.log(data);
+                
+                $http.get('/api/form/' + user.name)
+                   .success(function(data) {
+                        var form=data[0];
+                        mergeAnswers($scope.sections, form);       
+                   });
+                
             })
             .error(function(data) {
                 console.log('Error: ' + data);
             });
-
-    mmsa.controller('summaryController',  function() {
-        
-        });  
-
-
-        $scope.save = function() {            
-                $http.post('/api/form', $scope.sections)
-                    .success(function(data) {
-                        
-                        //$scope.formData = {}; // clear the form so our user is ready to enter another
-                        $location.path('/summary');
-                        
-                        //$scope.todos = data;
-                        //console.log(data);
-                    })
-                    .error(function(data) {
-                        console.log('Error: ' + data);
-                    });  
-        };
+  */          
+        $scope.save = function() {        
+            
+                    var answers = extractAnswers($scope.sections, user.name);
+                
+                    $http.post('/api/form', answers)
+                        .success(function(data) {
+                            
+                            //$scope.formData = {}; // clear the form so our user is ready to enter another
+                            $location.path('/summary');
+                            
+                            //$scope.todos = data;
+                            //console.log(data);
+                        })
+                        .error(function(data) {
+                            console.log('Error: ' + data);
+                        });  
+            };
             
     });
+
+    mmsa.controller('summaryController',  function($scope, $http, $location, user) {
+        if (user.name == null)
+        {
+            $location.path('/login');    
+        }
+        
+        $scope.user = user;
+        
+        loadModelAndForm($scope, $http, user);
+    });  
+
+
+    mmsa.controller('loginController',  function($scope, $http, $location, user) {
+
+        $scope.login = function(company) {
+                user.name = company.name;
+                
+                $location.path('/main');
+        };                      
+    });  
+
+    function loadModelAndForm($scope, $http, user)
+    {
+        $http.get('/api/model')
+            .success(function(data) {
+                $scope.sections = data;
+                
+                $http.get('/api/form/' + user.name)
+                   .success(function(data) {
+                        var form=data[0];
+                        $scope.form = form;
+                        mergeAnswers($scope.sections, form);       
+                   });
+            })
+            .error(function(data) {
+                console.log('Error: ' + data);
+            });        
+    }
+
+    function mergeAnswers(sections, form)
+    {
+      if (form == null)
+      {
+          return;
+      }   
+        
+      Enumerable.From(sections).ForEach(function(section){
+          Enumerable.From(section.questions).ForEach(function(question){
+            var answer = Enumerable.From(form.answers).FirstOrDefault(null, "$.id==" + question.id);
+            if (answer != null)
+            {
+                question.completed=true;
+                question.answer = answer.answer;
+            }
+            console.log(question.id + " is " + question.answer);
+          });
+      });
+    }
+    
+    function extractAnswers(sections, companyName)
+    {
+        var form =  {
+            "id": "",
+            "company" : companyName,
+            "timestamp" : new Date().toISOString(),
+            "version": "model.v1",
+            "answers": []
+        };
+
+        Enumerable.From(sections).ForEach(function(section){
+          Enumerable.From(section.questions).ForEach(function(question){
+            if (question.answer != null)
+            {
+                form.answers.push({"id":question.id, "answer": question.answer});
+            }
+          });
+        });
+
+        console.log("form:" + angular.toJson(form));
+        return form;
+    }
+     
+    
 
 </script>    
    
@@ -75,9 +181,9 @@
 
 <body>
 
-<div class="top-marquee-bg" style="background-image:url(https://venturesblob.blob.core.windows.net/generaluploads/1600x460_bw1.jpg);background-color:#ffffff;">
-    <div class="top-marquee-bg-texture" style="background-image:url(https://venturesblob.blob.core.windows.net/generaluploads/patternChevron.png);"></div>
-    <h1 style="color:white; padding-left:50px;" valign="center"><br/><img src="growbw.png" height="100" width="100">Company Maturity Model - Self Assessment</h1>
+<div class="top-marquee-bg" >
+    <div class="top-marquee-bg-texture"></div>
+    <h1 class="top-marquee-h1">&nbsp;&nbsp;<img src="growbw.png" height="100" width="100">&nbsp;&nbsp;<span>Company Maturity Model - Self Assessment</span></h1>
 </div>
 
 <div ng-view>

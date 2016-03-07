@@ -148,11 +148,23 @@ input[type=radio]:not(old):checked +  label > span > span{
 
 .top-marquee-bg-texture
 {
-    background-image: url(https://venturesblob.blob.core.windows.net/generaluploads/patternChevron.png);
+    background-image: url("https://venturesblob.blob.core.windows.net/generaluploads/patternChevron.png");
     position: absolute;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=8)";
     filter: alpha(opacity=8);
     opacity: 0.08;
     background-repeat: repeat;
+    background-size:cover;
     width:100%;
+}
+
+.top-marquee-h1
+{
+    color:white;
+    padding-top:30px;
+}
+
+.summary-text
+{
+    width:300px;
 }

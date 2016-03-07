@@ -12,8 +12,11 @@ Controller.prototype = {
     RegisterPaths: function(router) {
         router.route('/model')
             .get(this.GetModel.bind(this));
-        
-        router.route('/form/:form_id')
+
+        router.route('/form/:company')
+            .get(this.ListForms.bind(this));
+
+        router.route('/form/:company/:form_id')
             .get(this.GetForm.bind(this));
             
         router.route('/form')
@@ -73,7 +76,6 @@ Controller.prototype = {
                     });
                 }
                 else{
-                    
                     req.body.id = newId;
                     self.persistence.addItem(req.body, function (err,form) {
                         if (err) {
@@ -84,6 +86,29 @@ Controller.prototype = {
                     });
                 }
             });
+    },
+
+    ListForms: function(req, res) {
+        var self = this;
+
+        var company = req.params.company;
+
+        var querySpec = {
+            query: 'SELECT * FROM r Root where Root.company=@company order by Root.timestamp desc',
+             parameters: [{
+                name: '@company',
+                value: company
+            }]
+        };        
+
+        self.persistence.find(querySpec, function (err, items) {
+            if (err) {
+                res.json(err);
+                throw (err);
+            }
+
+            res.json(items);
+        });
     },
     
     GetForm: function(req, res) {
