@@ -13,10 +13,10 @@
             </div>        
         
             <div class="bordered" ng-repeat="section in sections">
-                <h3>{{section.id}}. {{section.title}}</h4>
+                <h3>{{section.id}}. {{section.title}}</h3>
                 <table>
                 <tr ng-repeat="q in section.questions">
-                        <td width="250px"><h4>{{q.id}} {{q.title}}</h4></td><td><img src="score_{{q.answer}}.png"></td>
+                        <td width="250px">{{q.id}} {{q.title}}</td><td><img src="score_{{q.answer}}.png" title="{{q.answer}} {{q.options[q.answer-1].text}}"></td>
                 </tr>
                 </table>
             </div>
