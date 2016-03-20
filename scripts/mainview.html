@@ -6,19 +6,22 @@
         <td width="20%" valign="top">
             <div id="sticky-anchor"></div>
             <div id="sticky">
+
+                 <button id="save" type="submit" ng-click="save()" ng-disabled="!user.loggedIn">Save</button><button type="submit" ng-click="view()">View</button>
+                 <br/>
+
                 
                 <h4><a class="stealthlink" href="#intro">Intro</a></h4>
                 
                 <div ng-repeat="section in sections">
                 
-                    <h4><a class="stealthlink" href="#section{{section.id}}">{{section.id}}. {{section.title}}</a></h4>
+                    <h4><a class="stealthlink" href="#section{{section.id}}" target="_self">{{section.id}}. {{section.title}}</a></h4>
                     
                     <div ng-repeat="q in section.questions">
-                        <a class="stealthlink" href="#q{{q.id}}"><span class="completed{{q.answer != nil}}">{{q.id}} {{q.title}}</span></a>
+                        <a class="stealthlink" href="#q{{q.id}}"  target="_self"><span class="completed{{q.answer != nil}}">{{q.id}} {{q.title}}</span></a>
                     </div>
                 </div>
                 
-                 <button type="submit" ng-click="save()">Save</button><button type="submit" ng-click="view()">View</button>
                 
             </div>    
         </td>
@@ -28,7 +31,7 @@
     <table>
         <tr>
             <td>
-                <h2><a name="intro"></a>Introduction</h2>
+                <h2><a id="intro"></a>Introduction</h2>
                 The Microsoft Ventures Accelerator runs a customized program which we tailor to the specific needs of your company.  This assessment is a useful tool for uncovering those needs, and determining which areas of focus will maximize the benefit your company derives from the Accelerator program.  
 
                 <h3>Instructions</h3>
@@ -50,11 +53,11 @@
 </div>
             
 <div ng-repeat="section in sections" class="bordered">
-<h2><a name="section{{section.id}}"></a> {{section.id}}. {{section.title}}</h2>
+<h2><a id="section{{section.id}}"></a> {{section.id}}. {{section.title}}</h2>
     
     <div ng-repeat="q in section.questions">
 
-        <a name="q{{q.id}}"></a>
+        <a id="q{{q.id}}"></a>
         <h3  class="completed{{q.completed != nil}}">{{q.id}} {{q.title}}: {{q.subtitle}}</h3>
         
         <div  ng-repeat="option in q.options">

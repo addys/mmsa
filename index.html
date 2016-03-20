@@ -27,7 +27,15 @@
             templateUrl: "mainview.html",
             controller: "mainController"
         })
+        .when("/main/:user", {
+            templateUrl: "mainview.html",
+            controller: "mainController"
+        })        
         .when("/summary", {
+            templateUrl: "summaryview.html",
+            controller: "summaryController"
+        })
+        .when("/summary/:user", {
             templateUrl: "summaryview.html",
             controller: "summaryController"
         })
@@ -42,7 +50,13 @@
         return {};
     });
 
-    mmsa.controller('mainController', function($scope, $http, $location, user) {
+    mmsa.controller('mainController', function($scope, $http, $location, $routeParams, user) {
+
+        if ($routeParams.user != null)
+        {
+            user.name = $routeParams.user;  
+            user.loggedIn = false;  
+        }
         
         if (user.name == null)
         {
@@ -53,23 +67,9 @@
         $scope.user = user;
         
         loadModelAndForm($scope, $http, user);
-/*        
-        // when landing on the page, get all sections and show them
-        $http.get('/api/model')
-            .success(function(data) {
-                $scope.sections = data;
-                
-                $http.get('/api/form/' + user.name)
-                   .success(function(data) {
-                        var form=data[0];
-                        mergeAnswers($scope.sections, form);       
-                   });
-                
-            })
-            .error(function(data) {
-                console.log('Error: ' + data);
-            });
-  */          
+        
+        document.getElementById("save").disabled = !user.loggedIn;        
+        
         $scope.save = function() {        
             
                     var answers = extractAnswers($scope.sections, user.name);
@@ -94,7 +94,14 @@
             
     });
 
-    mmsa.controller('summaryController',  function($scope, $http, $location, user) {
+    mmsa.controller('summaryController',  function($scope, $http, $location,  $routeParams, user) {
+        
+        if ($routeParams.user != null)
+        {
+            user.name = $routeParams.user;  
+            user.loggedIn = false;  
+        }
+                
         if (user.name == null)
         {
             $location.path('/login');    
@@ -110,6 +117,7 @@
 
         $scope.login = function(company) {
                 user.name = company.name;
+                user.loggedIn = true;
                 
                 $location.path('/main');
         };                      
