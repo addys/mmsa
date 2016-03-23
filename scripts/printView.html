@@ -1,0 +1,56 @@
+
+<style>
+    .isAnswer
+    {
+        font-weight: bold;
+        color:black;
+        font-size: 0.7em;         
+    }
+    
+    .isNotAnswer
+    {
+        font-size: 0.7em;         
+    }
+    
+    .title
+    {
+        font-weight: bold;
+        font-size: 1.8em;        
+    }
+    
+    .section
+    {
+        font-size: 1.4em;        
+    }
+    
+    .question
+    {
+        font-size: 1.1em;  
+    }
+    
+</style>
+
+<div class="title">{{user.name}}</div>
+<span class="question">Maturity Model (Self Assessment), {{timestamp.toLocaleDateString("en-us")}} {{timestamp.toLocaleTimeString("en-us")}}</span>
+
+<div ng-repeat="section in sections" class="bordered">
+<div class="section">{{section.id}}. {{section.title}}</div>
+    
+    <div ng-repeat="q in section.questions">
+        <br/>
+        <span class="question">{{q.id}} {{q.title}}: {{q.subtitle}}</span>
+        
+        <div ng-repeat="option in q.options">
+                <span class="{{q.answer == option.number ? 'isAnswer' : 'isNotAnswer'}}" >{{option.number}}. {{option.text}}</span>
+        </div>
+    </div>
+</div>
+
+<script lang="javascript">
+    
+  $(function () {
+         document.getElementById("header").outerHTML="";
+    });    
+    
+   
+</script>

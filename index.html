@@ -39,6 +39,10 @@
             templateUrl: "summaryview.html",
             controller: "summaryController"
         })
+        .when("/print/:user", {
+            templateUrl: "printView.html",
+            controller: "summaryController"
+        })        
         .when("/login", {
             templateUrl: "login.html",
             controller: "loginController"
@@ -133,7 +137,8 @@
                    .success(function(data) {
                         var form=data[0];
                         $scope.form = form;
-                        mergeAnswers($scope.sections, form);       
+                        mergeAnswers($scope.sections, form);  
+                        $scope.timestamp=  new Date(form.timestamp);     
                    });
             })
             .error(function(data) {
@@ -193,7 +198,7 @@
 
 <body>
 
-<div class="top-marquee-bg" >
+<div id="header" class="top-marquee-bg" >
     <div class="top-marquee-bg-texture"></div>
     <h1 class="top-marquee-h1">&nbsp;&nbsp;<img src="growbw.png" height="100" width="100">&nbsp;&nbsp;<span>Company Maturity Model - Self Assessment</span></h1>
 </div>

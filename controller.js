@@ -94,7 +94,7 @@ Controller.prototype = {
         var company = req.params.company;
 
         var querySpec = {
-            query: 'SELECT * FROM r Root where Root.company=@company order by Root.timestamp desc',
+            query: 'SELECT * FROM r Root where Root.company=@company order by Root._ts desc',
              parameters: [{
                 name: '@company',
                 value: company
